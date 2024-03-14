@@ -17,7 +17,7 @@ const BillboardPage: React.FC<BillboardPageProps> = async ({ params }) => {
     const formattedBillboards: BillboardColumn[] = billboards.map((item) => ({
         id: item.id,
         label: item.label,
-        createdAt: format(item.createdAt, "MMM do,yyyy"),
+        createdAt: format(item.createdAt, "MMM do, yyyy"),
     }));
     return (
         <div className="flex-col">

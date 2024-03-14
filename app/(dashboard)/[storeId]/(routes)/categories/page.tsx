@@ -21,7 +21,7 @@ const CategoriesPage: React.FC<CategoriesPageProps> = async ({ params }) => {
         id: item.id,
         name: item.name,
         billboardLabel: item.billboard.label,
-        createdAt: format(item.createdAt, "MMM do,yyyy"),
+        createdAt: format(item.createdAt, "MMM do, yyyy"),
     }));
     return (
         <div className="flex-col">

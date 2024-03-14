@@ -17,7 +17,7 @@ const TypesPage: React.FC<TypesPageProps> = async ({ params }) => {
     const formattedTypes: TypesColumns[] = types.map((item) => ({
         id: item.id,
         name: item.name,
-        createdAt: format(item.createdAt, "MMM do,yyyy"),
+        createdAt: format(item.createdAt, "MMM do, yyyy"),
     }));
     return (
         <div className="flex-col">
