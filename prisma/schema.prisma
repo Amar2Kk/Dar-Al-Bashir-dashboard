@@ -18,10 +18,7 @@ model Store {
   billboard  Billboard[] @relation("StoreToBillboard")
   categories Category[]  @relation("StoreToCategory")
   types      Type[]      @relation("StoreToType")
-<<<<<<< HEAD
-=======
   products   Product[]   @relation("StoreToProduct")
->>>>>>> 0b36837 (Products Entity (Admin))
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
 }
@@ -45,10 +42,7 @@ model Category {
   store       Store     @relation("StoreToCategory", fields: [storeId], references: [id])
   billboardId String
   billboard   Billboard @relation(fields: [billboardId], references: [id])
-<<<<<<< HEAD
-=======
   products    Product[] @relation("CategoryToProduct")
->>>>>>> 0b36837 (Products Entity (Admin))
   name        String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -58,26 +52,17 @@ model Category {
 }
 
 model Type {
-<<<<<<< HEAD
-  id      String @id @default(uuid())
-  storeId String
-  store   Store  @relation("StoreToType", fields: [storeId], references: [id])
-  name    String
-=======
   id       String    @id @default(uuid())
   storeId  String
   store    Store     @relation("StoreToType", fields: [storeId], references: [id])
   products Product[]
 
   name      String
->>>>>>> 0b36837 (Products Entity (Admin))
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([storeId])
 }
-<<<<<<< HEAD
-=======
 
 model Product {
   id      String @id @default(uuid())
@@ -118,4 +103,3 @@ model Image {
 
   @@index([productId])
 }
->>>>>>> 0b36837 (Products Entity (Admin))
