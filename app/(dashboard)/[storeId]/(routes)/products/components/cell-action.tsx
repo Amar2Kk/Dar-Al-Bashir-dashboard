@@ -31,17 +31,17 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
     const onCopy = (id: string) => {
         navigator.clipboard.writeText(id);
-        toast.success("Billboard ID copied to clipboard.");
+        toast.success("Product ID copied to clipboard.");
     };
     const onDelete = async () => {
         try {
             setLoading(true);
-            await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
+            await axios.delete(`/api/${params.storeId}/products/${data.id}`);
             router.refresh();
-            toast.success("Billboard deleted.");
+            toast.success("Product deleted.");
         } catch (error: any) {
             toast.error(
-                "Make sure you removed all categories using this billboard first."
+                "Something went wrong."
             );
         } finally {
             setLoading(false);
@@ -77,7 +77,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
                         className="group"
                         onClick={() =>
                             router.push(
-                                `/${params.storeId}/billboards/${data.id}`
+                                `/${params.storeId}/products/${data.id}`
                             )
                         }
                     >

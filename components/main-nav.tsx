@@ -33,14 +33,11 @@ export function MainNav({
             active: pathname === `/${params.storeId}/types`,
         },
         {
-<<<<<<< HEAD
-=======
             href: `/${params.storeId}/products`,
             label: "Products",
             active: pathname === `/${params.storeId}/products`,
         },
         {
->>>>>>> 0b36837 (Products Entity (Admin))
             href: `/${params.storeId}/settings`,
             label: "Settings",
             active: pathname === `/${params.storeId}/settings`,
