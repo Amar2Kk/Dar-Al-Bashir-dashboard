@@ -18,6 +18,10 @@ model Store {
   billboard  Billboard[] @relation("StoreToBillboard")
   categories Category[]  @relation("StoreToCategory")
   types      Type[]      @relation("StoreToType")
+<<<<<<< HEAD
+=======
+  products   Product[]   @relation("StoreToProduct")
+>>>>>>> 0b36837 (Products Entity (Admin))
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
 }
@@ -41,6 +45,10 @@ model Category {
   store       Store     @relation("StoreToCategory", fields: [storeId], references: [id])
   billboardId String
   billboard   Billboard @relation(fields: [billboardId], references: [id])
+<<<<<<< HEAD
+=======
+  products    Product[] @relation("CategoryToProduct")
+>>>>>>> 0b36837 (Products Entity (Admin))
   name        String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -50,12 +58,64 @@ model Category {
 }
 
 model Type {
+<<<<<<< HEAD
   id      String @id @default(uuid())
   storeId String
   store   Store  @relation("StoreToType", fields: [storeId], references: [id])
   name    String
+=======
+  id       String    @id @default(uuid())
+  storeId  String
+  store    Store     @relation("StoreToType", fields: [storeId], references: [id])
+  products Product[]
+
+  name      String
+>>>>>>> 0b36837 (Products Entity (Admin))
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([storeId])
 }
+<<<<<<< HEAD
+=======
+
+model Product {
+  id      String @id @default(uuid())
+  storeId String
+
+  store      Store    @relation("StoreToProduct", fields: [storeId], references: [id])
+  categoryId String
+  category   Category @relation("CategoryToProduct", fields: [categoryId], references: [id])
+
+  name       String
+  price      Decimal
+  inStock    Int
+  isFeatured Boolean @default(false)
+  isArchived Boolean @default(false)
+
+  typeId String
+  type   Type   @relation(fields: [typeId], references: [id])
+
+  images Image[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId])
+  @@index([categoryId])
+  @@index([typeId])
+}
+
+model Image {
+  id        String  @id @default(uuid())
+  productId String
+  prodcut   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  url String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+}
+>>>>>>> 0b36837 (Products Entity (Admin))

@@ -61,12 +61,19 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                     </div>
                 ))}
             </div>
+<<<<<<< HEAD
             <CldUploadWidget onUpload={onUpload} uploadPreset="vgyllt4y">
+=======
+            <CldUploadWidget onUpload={onUpload} uploadPreset="lresozxg">
+>>>>>>> 0b36837 (Products Entity (Admin))
                 {({ open }) => {
                     const onClick = () => {
                         open();
                     };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0b36837 (Products Entity (Admin))
                     return (
                         <Button
                             type="button"
