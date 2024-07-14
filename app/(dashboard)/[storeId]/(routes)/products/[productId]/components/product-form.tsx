@@ -10,7 +10,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
@@ -29,11 +35,13 @@ import ImageUpload from "@/components/ui/image-upload";
 import { Checkbox } from "@/components/ui/checkbox";
 
 interface ProductFormProps {
-    initialData: Product & {
-        images: Image[]
-    } | null;
+    initialData:
+        | (Product & {
+              images: Image[];
+          })
+        | null;
     categories: Category[];
-    types: Type[]
+    types: Type[];
 }
 const formSchema = z.object({
     name: z.string().min(2),
@@ -43,13 +51,16 @@ const formSchema = z.object({
     categoryId: z.string().min(1),
     typeId: z.string().min(1),
     isFeatured: z.boolean().default(false).optional(),
+    isNew: z.boolean().default(false).optional(),
     isArchived: z.boolean().default(false).optional(),
 });
 
 type ProductFormValues = z.infer<typeof formSchema>;
 
 export const ProductForm: React.FC<ProductFormProps> = ({
-    initialData, categories, types
+    initialData,
+    categories,
+    types,
 }) => {
     const params = useParams();
     const router = useRouter();
@@ -59,26 +70,27 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
     const title = initialData ? "Edit product" : "Create product";
     const description = initialData ? "Edit product" : "Add a new product";
-    const toastMessage = initialData
-        ? "Product updated."
-        : "Product created.";
+    const toastMessage = initialData ? "Product updated." : "Product created.";
     const action = initialData ? "Save changes" : "Create";
 
     const form = useForm<ProductFormValues>({
         resolver: zodResolver(formSchema),
-        defaultValues: initialData ? {
-            ...initialData,
-            price: parseFloat(String(initialData?.price))
-        } : {
-            name: '',
-            images: [],
-            price: 0,
-            inStock: 0,
-            categoryId: '',
-            typeId: '',
-            isFeatured: false,
-            isArchived: false,
-        },
+        defaultValues: initialData
+            ? {
+                ...initialData,
+                price: parseFloat(String(initialData?.price)),
+            }
+            : {
+                name: "",
+                images: [],
+                price: 0,
+                inStock: 0,
+                categoryId: "",
+                typeId: "",
+                isFeatured: false,
+                isNew: false,
+                isArchived: false,
+            },
     });
     const onSubmit = async (data: ProductFormValues) => {
         try {
@@ -111,9 +123,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             router.push(`/${params.storeId}/products`);
             toast.success("Product deleted.");
         } catch (error: any) {
-            toast.error(
-                "Something went wrong."
-            );
+            toast.error("Something went wrong.");
         } finally {
             setLoading(false);
             setOpen(false);
@@ -318,7 +328,28 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                         <FormLabel>Featured</FormLabel>
                                         <FormDescription>
                                             This product will appear on the home
-                                            page.
+                                            page in the featured books section.
+                                        </FormDescription>
+                                    </div>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="isNew"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                                    <FormControl>
+                                        <Checkbox
+                                            checked={field.value}
+                                            onCheckedChange={field.onChange}
+                                        />
+                                    </FormControl>
+                                    <div className="space-y-1 leading-none">
+                                        <FormLabel>New</FormLabel>
+                                        <FormDescription>
+                                            This product will appear on the home
+                                            page in the new books section.
                                         </FormDescription>
                                     </div>
                                 </FormItem>
@@ -338,7 +369,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                     <div className="space-y-1 leading-none">
                                         <FormLabel>Archived</FormLabel>
                                         <FormDescription>
-                                            This product will not appear anywhere in the store.
+                                            This product will not appear
+                                            anywhere in the store.
                                         </FormDescription>
                                     </div>
                                 </FormItem>

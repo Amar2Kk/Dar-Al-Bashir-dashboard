@@ -11,7 +11,8 @@ export type ProductColumn = {
     type: string;
     inStock: number;
     isFeatured: boolean;
-    isArchived: boolean
+    isNew: boolean;
+    isArchived: boolean;
     createdAt: string;
 };
 
@@ -27,6 +28,10 @@ export const columns: ColumnDef<ProductColumn>[] = [
     {
         accessorKey: "isFeatured",
         header: "Featured",
+    },
+    {
+        accessorKey: "isNew",
+        header: "New",
     },
     {
         accessorKey: "price",

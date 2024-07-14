@@ -77,12 +77,13 @@ model Product {
   price      Decimal
   inStock    Int
   isFeatured Boolean @default(false)
+  isNew      Boolean @default(false)
   isArchived Boolean @default(false)
 
   typeId String
   type   Type   @relation(fields: [typeId], references: [id])
 
-  images Image[]
+  images     Image[]
   orderItems OrderItem[]
 
   createdAt DateTime @default(now())
@@ -123,13 +124,13 @@ model Order {
 }
 
 model OrderItem {
-  id      String @id @default(uuid())
+  id String @id @default(uuid())
 
   orderId String
   order   Order  @relation(fields: [orderId], references: [id])
 
   productId String
-  product Product @relation(fields: [productId],references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 
   @@index([orderId])
   @@index([productId])

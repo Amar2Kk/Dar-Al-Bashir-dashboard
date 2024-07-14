@@ -23,10 +23,13 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
         id: item.id,
         name: item.name,
         inStock: item.inStock,
-        price: formatter.format(item.price.toNumber()).replace('EGP', '').trim() + ' EGP',
+        price:
+            formatter.format(item.price.toNumber()).replace("EGP", "").trim() +
+            " EGP",
         category: item.category.name,
         type: item.type.name,
         isFeatured: item.isFeatured,
+        isNew: item.isNew,
         isArchived: item.isArchived,
         createdAt: format(item.createdAt, "MMM do, yyyy"),
     }));

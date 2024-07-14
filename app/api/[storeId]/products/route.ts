@@ -18,6 +18,7 @@ export async function POST(
             typeId,
             images,
             isFeatured,
+            isNew,
             isArchived,
         } = body;
 
@@ -69,6 +70,7 @@ export async function POST(
                 categoryId,
                 typeId,
                 isFeatured,
+                isNew,
                 isArchived,
                 storeId: params.storeId,
                 images: {
@@ -96,6 +98,7 @@ export async function GET(
         const categoryId = searchParams.get("categoryId") || undefined;
         const typeId = searchParams.get("typeId") || undefined;
         const isFeatured = searchParams.get("isFeatured");
+        const isNew = searchParams.get("isNew");
 
         if (!params.storeId) {
             return new NextResponse("Store ID is required", {
@@ -108,6 +111,7 @@ export async function GET(
                 categoryId,
                 typeId,
                 isFeatured: isFeatured ? true : undefined,
+                isNew: isNew ? true : undefined,
                 isArchived: false,
             },
             include: {

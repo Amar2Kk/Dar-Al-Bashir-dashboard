@@ -47,6 +47,7 @@ export async function PATCH(
             typeId,
             images,
             isFeatured,
+            isNew,
             isArchived,
         } = body;
 
@@ -104,6 +105,7 @@ export async function PATCH(
                     deleteMany: {},
                 },
                 isFeatured,
+                isNew,
                 isArchived,
             },
         });
