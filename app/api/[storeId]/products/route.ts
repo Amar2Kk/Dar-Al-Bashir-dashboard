@@ -12,6 +12,8 @@ export async function POST(
         const body = await req.json();
         const {
             name,
+            author,
+            desc,
             price,
             inStock,
             categoryId,
@@ -27,6 +29,12 @@ export async function POST(
         }
         if (!name) {
             return new NextResponse("Name is required", { status: 400 });
+        }
+        if (!author) {
+            return new NextResponse("Author is required", { status: 400 });
+        }
+        if (!desc) {
+            return new NextResponse("Description is required", { status: 400 });
         }
         if (!price) {
             return new NextResponse("Price is required", { status: 400 });
@@ -65,6 +73,8 @@ export async function POST(
         const product = await prismaDB.product.create({
             data: {
                 name,
+                author,
+                desc,
                 price,
                 inStock,
                 categoryId,

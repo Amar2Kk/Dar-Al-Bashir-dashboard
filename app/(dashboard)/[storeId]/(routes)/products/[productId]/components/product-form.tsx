@@ -45,6 +45,8 @@ interface ProductFormProps {
 }
 const formSchema = z.object({
     name: z.string().min(2),
+    author: z.string().min(2),
+    desc: z.string().min(2),
     images: z.object({ url: z.string() }).array(),
     price: z.coerce.number().min(1),
     inStock: z.coerce.number().min(1),
@@ -77,20 +79,22 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         resolver: zodResolver(formSchema),
         defaultValues: initialData
             ? {
-                ...initialData,
-                price: parseFloat(String(initialData?.price)),
-            }
+                  ...initialData,
+                  price: parseFloat(String(initialData?.price)),
+              }
             : {
-                name: "",
-                images: [],
-                price: 0,
-                inStock: 0,
-                categoryId: "",
-                typeId: "",
-                isFeatured: false,
-                isNew: false,
-                isArchived: false,
-            },
+                  name: "",
+                  author: "",
+                  desc: "",
+                  images: [],
+                  price: 0,
+                  inStock: 0,
+                  categoryId: "",
+                  typeId: "",
+                  isFeatured: false,
+                  isNew: false,
+                  isArchived: false,
+              },
     });
     const onSubmit = async (data: ProductFormValues) => {
         try {
@@ -200,6 +204,40 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                         <Input
                                             disabled={loading}
                                             placeholder="Product Name"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="author"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Author</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            disabled={loading}
+                                            placeholder="Product author"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="desc"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Description</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            disabled={loading}
+                                            placeholder="Product description"
                                             {...field}
                                         />
                                     </FormControl>

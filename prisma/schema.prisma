@@ -73,7 +73,10 @@ model Product {
   categoryId String
   category   Category @relation("CategoryToProduct", fields: [categoryId], references: [id])
 
-  name       String
+  name   String
+  author String
+  desc   String @db.LongText
+
   price      Int
   inStock    Int
   isFeatured Boolean @default(false)

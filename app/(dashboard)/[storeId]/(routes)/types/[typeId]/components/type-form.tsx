@@ -81,11 +81,7 @@ export const TypesForm: React.FC<TypesFormProps> = ({ initialData }) => {
             toast.success("Type deleted.");
         } catch (error: any) {
             toast.error(
-<<<<<<< HEAD
-                "Make sure you removed all categories using this type first."
-=======
                 "Make sure you removed all types using this type first."
->>>>>>> 0b36837 (Products Entity (Admin))
             );
         } finally {
             setLoading(false);

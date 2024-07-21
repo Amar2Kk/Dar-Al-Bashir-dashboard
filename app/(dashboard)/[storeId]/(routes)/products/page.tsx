@@ -22,10 +22,10 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
     const formattedProducts: ProductColumn[] = products.map((item) => ({
         id: item.id,
         name: item.name,
+        author: item.author,
+        desc: item.desc,
         inStock: item.inStock,
-        price:
-            formatter.format(item.price).replace("EGP", "").trim() +
-            " EGP",
+        price: formatter.format(item.price).replace("EGP", "").trim() + " EGP",
         category: item.category.name,
         type: item.type.name,
         isFeatured: item.isFeatured,
