@@ -109,6 +109,8 @@ export async function GET(
         const typeId = searchParams.get("typeId") || undefined;
         const isFeatured = searchParams.get("isFeatured");
         const isNew = searchParams.get("isNew");
+        const name = searchParams.get("name") || undefined;
+        const author = searchParams.get("author") || undefined;
 
         if (!params.storeId) {
             return new NextResponse("Store ID is required", {
@@ -118,6 +120,8 @@ export async function GET(
         const products = await prismaDB.product.findMany({
             where: {
                 storeId: params.storeId,
+                name,
+                author,
                 categoryId,
                 typeId,
                 isFeatured: isFeatured ? true : undefined,
