@@ -19,9 +19,27 @@ model Store {
   categories Category[]  @relation("StoreToCategory")
   types      Type[]      @relation("StoreToType")
   products   Product[]   @relation("StoreToProduct")
-  order      Order[]     @relation("StoreToOrder")
+  orders     Order[]     @relation("StoreToOrder")
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
+}
+
+model Address {
+  id        String   @id @default(uuid())
+  userId    String
+  name      String
+  apartment String
+  building  String
+  floor     String
+  street    String
+  city      String
+  state     String
+  country   String
+  zipCode   String
+  phone     String
+  Order     Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model Billboard {
@@ -66,10 +84,11 @@ model Type {
 }
 
 model Product {
-  id      String @id @default(uuid())
-  storeId String
+  id String @id @default(uuid())
 
-  store      Store    @relation("StoreToProduct", fields: [storeId], references: [id])
+  storeId String
+  store   Store  @relation("StoreToProduct", fields: [storeId], references: [id])
+
   categoryId String
   category   Category @relation("CategoryToProduct", fields: [categoryId], references: [id])
 
@@ -100,7 +119,7 @@ model Product {
 model Image {
   id        String  @id @default(uuid())
   productId String
-  prodcut   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   url String
 
@@ -111,19 +130,23 @@ model Image {
 }
 
 model Order {
-  id          String      @id @default(uuid())
-  storeId     String
-  store       Store       @relation("StoreToOrder", fields: [storeId], references: [id])
-  orderItems  OrderItem[]
-  isPaid      Boolean     @default(false)
-  isDelivered Boolean     @default(false)
-  phone       String      @default("")
-  address     String      @default("")
+  id            String      @id @default(uuid())
+  storeId       String
+  store         Store       @relation("StoreToOrder", fields: [storeId], references: [id])
+  orderItems    OrderItem[]
+  userId        String
+  PayMobOrderId String
+  isPaid        Boolean     @default(false)
+  isDelivered   Boolean     @default(false)
+  addressId     String
+  address       Address     @relation(fields: [addressId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([storeId])
+  @@index([userId])
+  @@index([addressId])
 }
 
 model OrderItem {

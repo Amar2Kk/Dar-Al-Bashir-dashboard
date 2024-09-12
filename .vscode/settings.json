@@ -1,4 +1,24 @@
 {
     "docwriter.progress.trackClasses": false,
-    "docwriter.progress.trackTypes": false
+    "docwriter.progress.trackTypes": false,
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#167088",
+        "activityBar.background": "#167088",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#e976d1",
+        "activityBarBadge.foreground": "#15202b",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#167088",
+        "statusBar.background": "#0f4c5c",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#167088",
+        "statusBarItem.remoteBackground": "#0f4c5c",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#0f4c5c",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#0f4c5c99",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#0f4c5c"
 }

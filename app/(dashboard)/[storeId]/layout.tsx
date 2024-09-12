@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import prismaDB from "@/lib/prismaDB";
 import NavBar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 export default async function DashboardLayout({
     children,
@@ -27,9 +28,10 @@ export default async function DashboardLayout({
     }
 
     return (
-        <div className="">
-            <NavBar/>
-            {children}
+        <div className="min-h-[98vh] flex flex-col">
+            <NavBar />
+            <main className="flex-grow">{children}</main>
+            <Footer />
         </div>
     );
 }

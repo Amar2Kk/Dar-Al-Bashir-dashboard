@@ -34,10 +34,21 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         return null;
     }
 
+    // Prioritize PNG files but show other formats as well
+    const sortedImages = [...value].sort((a, b) => {
+        if (a.endsWith(".png") && !b.endsWith(".png")) {
+            return -1; // PNGs come first
+        }
+        if (!a.endsWith(".png") && b.endsWith(".png")) {
+            return 1; // Non-PNGs come after
+        }
+        return 0; // Keep same order if both are PNGs or both are non-PNGs
+    });
+
     return (
         <div>
             <div className="mb-4 flex items-center gap-4">
-                {value.map((url) => (
+                {sortedImages.map((url) => (
                     <div
                         key={url}
                         className="relative w-[200px] h-[200px] rounded-md overflow-hidden"
@@ -61,7 +72,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                     </div>
                 ))}
             </div>
-            <CldUploadWidget onUpload={onUpload} uploadPreset="lresozxg">
+            <CldUploadWidget
+                onUpload={onUpload}
+                uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_PRESET}
+            >
                 {({ open }) => {
                     const onClick = () => {
                         open();
