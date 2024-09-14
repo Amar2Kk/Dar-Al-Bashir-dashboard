@@ -7,6 +7,7 @@ import { BillboardColumn } from "./components/columns";
 interface BillboardPageProps {
     params: { storeId: string };
 }
+export const revalidate = 0;
 
 const BillboardPage: React.FC<BillboardPageProps> = async ({ params }) => {
     const billboards = await prismaDB.billboard.findMany({

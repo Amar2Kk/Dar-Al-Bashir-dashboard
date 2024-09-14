@@ -7,6 +7,7 @@ import { TypesColumns } from "./components/columns";
 interface TypesPageProps {
     params: { storeId: string };
 }
+export const revalidate = 0;
 
 const TypesPage: React.FC<TypesPageProps> = async ({ params }) => {
     const types = await prismaDB.type.findMany({

@@ -8,6 +8,7 @@ import { formatter } from "@/lib/utils";
 interface ProductPageProps {
     params: { storeId: string };
 }
+export const revalidate = 0;
 
 const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
     const products = await prismaDB.product.findMany({

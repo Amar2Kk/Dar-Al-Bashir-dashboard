@@ -7,6 +7,7 @@ import { CategoryClient } from "./components/client";
 interface CategoriesPageProps {
     params: { storeId: string };
 }
+export const revalidate = 0;
 
 const CategoriesPage: React.FC<CategoriesPageProps> = async ({ params }) => {
     const categories = await prismaDB.category.findMany({
