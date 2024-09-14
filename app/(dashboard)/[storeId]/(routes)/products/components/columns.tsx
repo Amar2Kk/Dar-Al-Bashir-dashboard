@@ -1,7 +1,10 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
+
 import { CellAction } from "./cell-action";
+import { Button } from "@/components/ui/button";
 
 export type ProductColumn = {
     id: string;
@@ -30,7 +33,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
         cell: ({ row }) => (
             <span
                 className={`px-2 py-1 rounded-md text-white text-sm ${
-                    row.original.isFeatured ? "bg-green-500" : "bg-red-500"
+                    row.original.isFeatured ? "bg-green-500" : "bg-yellow-500"
                 }`}
             >
                 {row.original.isFeatured ? "True" : "False"}
@@ -84,7 +87,36 @@ export const columns: ColumnDef<ProductColumn>[] = [
     },
     {
         accessorKey: "category",
-        header: "Category",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() =>
+                        column.toggleSorting(column.getIsSorted() === "asc")
+                    }
+                >
+                    Category
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            );
+        },
+    },
+    {
+        accessorKey: "type",
+        header: ({ column }) => {
+            return (
+                <Button
+                className="p-0 m-0"
+                    variant="ghost"
+                    onClick={() =>
+                        column.toggleSorting(column.getIsSorted() === "asc")
+                    }
+                >
+                    Type
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            );
+        },
     },
     {
         accessorKey: "author",
