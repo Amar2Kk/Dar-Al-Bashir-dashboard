@@ -91,6 +91,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
             return (
                 <Button
                     variant="ghost"
+                    className="p-1 m-0"
                     onClick={() =>
                         column.toggleSorting(column.getIsSorted() === "asc")
                     }
