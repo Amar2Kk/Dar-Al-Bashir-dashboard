@@ -32,6 +32,21 @@ export async function POST(
             );
         }
 
+        const products = await prismaDB.product.findMany({
+            where: {
+                id: {
+                    in: productsIds
+                }
+            }
+        });
+
+        if (products.length !== productsIds.length) {
+            return NextResponse.json(
+                { message: "Some products not found." },
+                { status: 400 }
+            );
+        }
+
         // Create order
         const order = await prismaDB.order.create({
             data: {
@@ -41,8 +56,9 @@ export async function POST(
                 PayMobOrderId,
                 isPaid: true,
                 orderItems: {
-                    create: productsIds.map((productId: string) => ({
-                        product: { connect: { id: productId } },
+                    create: products.map((product) => ({
+                        product: { connect: { id: product.id } },
+                        price: product.price
                     })),
                 },
             },

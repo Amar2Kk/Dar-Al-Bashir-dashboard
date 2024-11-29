@@ -44,7 +44,7 @@ const OrderPage: React.FC<OrderPageProps> = async ({ params }) => {
             .join(", "),
         totalPrice: formatter.format(
             item.orderItems.reduce((total, item) => {
-                return total + Number(item.product?.price ?? 0);
+                return total + item.price;
             }, 0)
         ),
         isPaid: item.isPaid,
