@@ -49,9 +49,9 @@ export async function POST(
             include: { orderItems: true },
         });
 
-        const productIds = order.orderItems.map(
-            (orderItem) => orderItem.productId
-        );
+        const productIds = order.orderItems
+            .map((orderItem) => orderItem.productId)
+            .filter((id): id is string => id !== null);
 
         await prismaDB.product.updateMany({
             where: { id: { in: productIds } },
